@@ -38,8 +38,13 @@ public class EndpointsAsyncTask extends AsyncTask<String, Void, String>{
             myApiService = builder.build();
         }
 
+        String version = params[0];
+        if(!(version.equals(Joker.APP_VERSION_FREE) || version.equals(Joker.APP_VERSION_PAID))){
+            return "";
+        }
+
         try{
-            return myApiService.tellJoke(Joker.APP_VERSION_PAID).execute().getData();
+            return myApiService.tellJoke(params[0]).execute().getData();
         }catch (IOException e){
             return e.getMessage();
         }
