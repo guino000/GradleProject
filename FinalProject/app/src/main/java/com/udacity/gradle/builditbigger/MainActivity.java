@@ -14,14 +14,12 @@ import com.example.android.libjokes.Joker;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Joker mJoker;
     private EndpointsAsyncTask mJokesAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mJoker = new Joker();
     }
 
 
@@ -56,6 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mJokesAsyncTask.execute(getString(R.string.version));
+        mJokesAsyncTask.execute();
     }
 }

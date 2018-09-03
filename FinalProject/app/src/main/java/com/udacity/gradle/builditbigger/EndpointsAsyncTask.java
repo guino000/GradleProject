@@ -14,7 +14,7 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class EndpointsAsyncTask extends AsyncTask<String, Void, String>{
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String>{
     private static MyApi myApiService = null;
     private AsyncTaskDelegate<String> mDelegate;
 
@@ -23,7 +23,7 @@ public class EndpointsAsyncTask extends AsyncTask<String, Void, String>{
     }
 
     @Override
-    protected String doInBackground(String...params) {
+    protected String doInBackground(Void...voids) {
         if(myApiService == null) {
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -38,13 +38,8 @@ public class EndpointsAsyncTask extends AsyncTask<String, Void, String>{
             myApiService = builder.build();
         }
 
-        String version = params[0];
-        if(!(version.equals(Joker.APP_VERSION_FREE) || version.equals(Joker.APP_VERSION_PAID))){
-            return "";
-        }
-
         try{
-            return myApiService.tellJoke(params[0]).execute().getData();
+            return myApiService.tellJoke().execute().getData();
         }catch (IOException e){
             return e.getMessage();
         }

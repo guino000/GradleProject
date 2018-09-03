@@ -29,10 +29,10 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "tellJoke")
-    public MyBean tellJoke(@Named("version") String version){
+    public MyBean tellJoke(){
         MyBean response = new MyBean();
         Joker joker = new Joker();
-        response.setData(joker.getJoke(version));
+        response.setData(joker.getJoke());
         return response;
     }
 
